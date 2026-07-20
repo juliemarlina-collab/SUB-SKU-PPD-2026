@@ -8,7 +8,7 @@
   document.addEventListener('DOMContentLoaded', init);
 
   async function init() {
-    bindNavigation(); bindWorkspace();
+    bindNavigation(); bindWorkspace(); bindReferenceSearch();
     navigate(state.activeView);
     try {
       state.bootstrap = await gas('getPortalBootstrap');
@@ -54,30 +54,48 @@
       const notStarted = t.total > 0 && t.approved === 0;
       return `<article class="gauge-card"><div class="gauge" style="background:conic-gradient(${color} 0% ${t.percentage}%, #EDEBFA ${t.percentage}% 100%)" role="img" aria-label="${t.percentage}% disahkan"><div class="gauge-core">${t.percentage}%</div></div><h3>${escapeHtml(t.name)}</h3>${notStarted ? '<span class="gauge-flag">Belum Bermula</span>' : ''}<span class="gauge-note">${t.approved} / ${t.total} disahkan</span></article>`;
     }).join('');
-    $('#dashboard-teras').innerHTML = summary.teras.map(t => `<div class="teras-line"><strong>${escapeHtml(t.name)}</strong><div class="progress" aria-label="${t.percentage}% disahkan"><span style="width:${t.percentage}%"></span></div><span>${t.approved}/${t.total} · ${t.percentage}%</span></div>`).join('');
-    renderBars('#approval-bars', summary.approval, summary.total); renderBars('#source-bars', summary.source, summary.total);
+    $('#dashboard-teras').innerHTML = summary.teras.map(t => `<div class="teras-progress-card"><div class="tp-head"><span>${escapeHtml(t.name)}</span><span>${t.percentage}%</span></div><div class="tp-track" role="img" aria-label="${t.percentage}% disahkan"><div class="tp-fill" style="width:${t.percentage}%"></div></div><div class="tp-note">${t.approved} / ${t.total} Sub-SKU disahkan</div></div>`).join('');
+    $$('.donut-core').forEach(el => { el.textContent = `${summary.total} rekod`; });
+    renderDonut('#approval-donut', '#approval-bars', summary.approval, summary.total);
+    renderDonut('#source-donut', '#source-bars', summary.source, summary.total);
     renderReferences(references);
     $('#data-timestamp').textContent = `Data dijana: ${generatedAt}`;
     if (!user.authorized) $('#admin-content').innerHTML = `<div class="error-box"><strong>Akses baca sahaja.</strong><br>${escapeHtml(user.reason || 'Akaun anda tidak mempunyai akses kemaskini.')}</div>`;
   }
 
-  function renderBars(selector, data, total) {
-    $(selector).innerHTML = Object.entries(data).sort((a,b) => b[1]-a[1]).map(([label, count]) => {
+  const DONUT_COLORS = ['#8BC53F', '#5457FF', '#B06AD1', '#FF6568', '#0A0E4A'];
+  const DONUT_TEXT = ['#0A0E4A', '#fff', '#fff', '#fff', '#fff'];
+  function renderDonut(donutSelector, legendSelector, data, total) {
+    const entries = Object.entries(data).sort((a, b) => b[1] - a[1]);
+    const sum = entries.reduce((s, [, count]) => s + count, 0) || 1;
+    let acc = 0;
+    $(donutSelector).style.background = 'conic-gradient(' + entries.map(([, count], i) => {
+      const start = acc / sum * 360; acc += count; const end = acc / sum * 360;
+      return `${DONUT_COLORS[i % DONUT_COLORS.length]} ${start}deg ${end}deg`;
+    }).join(', ') + ')';
+    $(legendSelector).innerHTML = entries.map(([label, count], i) => {
       const percent = total ? Math.round(count / total * 1000) / 10 : 0;
-      return `<div class="bar-row"><span>${escapeHtml(label)}</span><div class="bar-track"><div class="bar-fill" style="width:${percent}%"></div></div><strong>${count} · ${percent}%</strong></div>`;
+      return `<div class="legend-row"><span class="legend-pill" style="background:${DONUT_COLORS[i % DONUT_COLORS.length]};color:${DONUT_TEXT[i % DONUT_TEXT.length]}">${escapeHtml(label)}</span><span class="legend-count">${count} · ${percent}%</span></div>`;
     }).join('');
   }
 
   const REFERENCE_GROUPS = [['UTAMA', 'Dokumen Utama — Hala Tuju, KPI & Akreditasi'], ['SOKONGAN', 'Dokumen Sokongan'], ['DALAMAN', 'Dokumen Dalaman PPD']];
-  function renderReferences(references) {
-    if (!references.length) { $('#reference-list').innerHTML = '<div class="empty-state">Tiada rujukan buat masa ini.</div>'; return; }
+  function bindReferenceSearch() {
+    const input = $('#reference-search');
+    if (!input) return;
+    input.addEventListener('input', () => renderReferences(state.bootstrap ? state.bootstrap.references : [], input.value));
+  }
+  function renderReferences(references, query = '') {
+    const q = query.trim().toLowerCase();
+    const rows = q ? references.filter(r => [r.title, r.shortName, r.source, r.year, r.category].filter(Boolean).join(' ').toLowerCase().includes(q)) : references;
+    if (!rows.length) { $('#reference-list').innerHTML = `<div class="empty-state">${q ? 'Tiada dokumen sepadan dengan carian ini.' : 'Tiada rujukan buat masa ini.'}</div>`; return; }
     const known = REFERENCE_GROUPS.map(([key]) => key);
-    const groups = REFERENCE_GROUPS.filter(([key]) => references.some(r => r.category === key))
-      .map(([key, label]) => [label, references.filter(r => r.category === key)]);
-    const others = references.filter(r => !known.includes(r.category));
+    const groups = REFERENCE_GROUPS.filter(([key]) => rows.some(r => r.category === key))
+      .map(([key, label]) => [label, rows.filter(r => r.category === key)]);
+    const others = rows.filter(r => !known.includes(r.category));
     if (others.length) groups.push(['Lain-lain', others]);
-    $('#reference-list').innerHTML = groups.map(([label, rows]) =>
-      `<section class="ref-group"><h3>${escapeHtml(label)}</h3>${rows.map(referenceCard).join('')}</section>`).join('');
+    $('#reference-list').innerHTML = groups.map(([label, groupRows]) =>
+      `<section class="ref-group"><h3>${escapeHtml(label)}<span class="group-count">${groupRows.length} dokumen</span></h3>${groupRows.map(referenceCard).join('')}</section>`).join('');
   }
   function referenceCard(r) {
     const flagged = r.qaStatus && r.qaStatus !== 'PADANAN KANDUNGAN';

@@ -97,6 +97,7 @@
 
         <span class="eyebrow dark">📄 Dokumen Rujukan</span>
         <p class="section-lead">Sebagai hab capaian utama, platform ini dibangunkan agar pentadbir dapat mengakses dokumen berkaitan hala tuju strategik, KPI, akreditasi, dan takwim institusi dengan lebih mudah.</p>
+        <label class="reference-search">Cari dokumen<input id="reference-search" type="search" placeholder="Cari tajuk, sumber atau tahun…"></label>
         <div id="reference-list" aria-live="polite"></div>
 
         <span class="eyebrow dark">Portal Rujukan</span>
@@ -136,14 +137,20 @@
     </section>
 
     <section class="view" id="view-dashboard" data-page="dashboard" hidden>
-      <div class="page-hero"><div class="container"><span class="eyebrow">Pemantauan</span><h1>Dashboard Prestasi</h1><p>Semua indikator dikira secara langsung daripada status Fasa 1 dalam hamparan induk.</p></div></div>
+      <div class="page-hero"><div class="container"><span class="eyebrow">Pemantauan</span><h1>Dashboard Pemantauan</h1><p>Status pengesahan <span data-total>semua</span> rekod SUB-SKU 2026 mengikut status kelulusan, sumber dan TERAS — dikira secara langsung daripada hamparan induk.</p>
+        <div class="hero-actions">
+          <a class="button button-lime" href="https://docs.google.com/spreadsheets/d/1ubtQghJQQtyfUA2eO_utUAWjZBS8LgohHSJ5VJ0gsOI/edit" target="_blank" rel="noopener noreferrer">Lihat MASTER SUB-SKU 2026 →</a>
+          <a class="button button-white" href="https://docs.google.com/spreadsheets/d/1cfLvd8aVYTWm2CME39vOF5PtarW4DOkAkJbSih-pAgg/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Buka SUB-SKU Mengikut Jabatan/Unit →</a>
+        </div>
+        <p class="hero-note">MASTER SUB-SKU 2026: rujukan utama yang mengandungi keseluruhan rekod, pemetaan, sasaran dan status validasi SUB-SKU PPD 2026. SUB-SKU Mengikut Jabatan/Unit: paparan capaian yang telah disusun mengikut Jabatan/Unit untuk memudahkan pengguna mendapatkan dan menyalin rekod masing-masing.</p>
+      </div></div>
       <div class="container section">
         <div class="metric-grid" id="dashboard-metrics"></div>
         <div class="dashboard-grid">
-          <section class="panel" aria-labelledby="approval-title"><h2 id="approval-title">Status kelulusan</h2><div id="approval-bars"></div></section>
-          <section class="panel" aria-labelledby="source-title"><h2 id="source-title">Status sumber</h2><div id="source-bars"></div></section>
+          <section class="panel" aria-labelledby="approval-title"><h2 id="approval-title">Taburan Mengikut Status Kelulusan</h2><div class="donut-wrap"><div class="donut" id="approval-donut"><div class="donut-core"></div></div><div class="donut-legend" id="approval-bars"></div></div></section>
+          <section class="panel" aria-labelledby="source-title"><h2 id="source-title">Taburan Mengikut Status Sumber</h2><div class="donut-wrap"><div class="donut" id="source-donut"><div class="donut-core"></div></div><div class="donut-legend" id="source-bars"></div></div></section>
         </div>
-        <section class="panel" aria-labelledby="dashboard-teras-title"><div class="section-heading"><h2 id="dashboard-teras-title">Prestasi mengikut Teras</h2></div><div class="teras-table" id="dashboard-teras"></div></section>
+        <section class="panel" aria-labelledby="dashboard-teras-title"><h2 id="dashboard-teras-title">Status Mengikut TERAS</h2><p class="section-note">Dikira secara langsung daripada <span data-total>rekod</span> rekod Sub-SKU semasa.</p><div class="teras-progress-grid" id="dashboard-teras"></div></section>
       </div>
     </section>
 
@@ -153,13 +160,38 @@
     </section>
 
     <section class="view" id="view-bantuan" data-page="bantuan" hidden>
-      <div class="page-hero"><div class="container"><span class="eyebrow">Panduan Pengguna</span><h1>Bantuan & Soalan Lazim</h1><p>Panduan ringkas untuk menggunakan portal dengan betul dan selamat.</p></div></div>
-      <div class="container section faq-list">
-        <details><summary>Apakah SUB-SKU PPD 2026?</summary><p>SUB-SKU ialah pecahan sasaran strategik mengikut Teras, tier jawatan, PIC serta jabatan atau unit bagi memudahkan pelaksanaan dan pemantauan di Politeknik Port Dickson.</p></details>
-        <details><summary>Di manakah saya perlu mengemaskini rekod?</summary><p>Gunakan Panel Pentadbir dalam portal. Kemaskini dibuat terus pada rekod yang sama dalam MASTER SUB-SKU 2026 dan direkodkan dalam log audit.</p></details>
-        <details><summary>Mengapa sesetengah pautan rujukan tidak boleh dibuka?</summary><p>Pautan yang dikenal pasti tidak sepadan dinyahaktifkan bagi mengelakkan penggunaan dokumen yang salah. Pentadbir perlu menggantikannya dengan pautan rasmi yang betul.</p></details>
-        <details><summary>Siapakah yang boleh mengemaskini data?</summary><p>Hanya pengguna dengan e-mel rasmi @polipd.edu.my yang tersenarai dalam tab PENTADBIR 2026. Pengguna lain mendapat akses baca sahaja.</p></details>
-        <details><summary>Apakah maksud “Perlu Tindakan”?</summary><p>Nilai YA dijana secara automatik jika rekod belum lengkap, belum disahkan atau sumbernya belum disahkan/cadangan baharu.</p></details>
+      <div class="page-hero"><div class="container"><span class="eyebrow">Panduan Pengguna</span><h1>Bantuan &amp; Soalan Lazim</h1><p>Panduan ringkas untuk menggunakan portal dengan betul dan selamat — daripada mencari rekod sehingga mengemaskini status pengesahan.</p></div></div>
+      <div class="container section">
+        <h2 class="section-title">Panduan Pantas</h2>
+        <p class="section-note">Empat perkara yang paling kerap dilakukan dalam portal ini.</p>
+        <div class="help-grid">
+          <div class="help-card"><span class="feature-icon icon-violet">🔍</span><h3>Cari rekod anda</h3><p>Buka <strong>Workspace</strong>, taip nama PIC, jabatan atau kata kunci dalam kotak carian, atau gunakan penapis Teras, tier dan status untuk menyempitkan senarai.</p></div>
+          <div class="help-card"><span class="feature-icon icon-lime">📊</span><h3>Semak kemajuan</h3><p>Halaman <strong>Dashboard</strong> menunjukkan taburan status kelulusan dan sumber serta peratus pengesahan bagi setiap TERAS, dikira secara langsung daripada data terkini.</p></div>
+          <div class="help-card"><span class="feature-icon icon-coral">✏️</span><h3>Kemaskini rekod</h3><p>Untuk pentadbir: buka rekod dalam Workspace, klik <strong>Butiran</strong>, ubah status atau catatan, dan tekan <strong>Simpan kemaskini</strong>. Perubahan terus direkodkan ke hamparan induk dan log audit.</p></div>
+          <div class="help-card"><span class="feature-icon icon-pink">📚</span><h3>Akses dokumen rasmi</h3><p>Halaman <strong>Rujukan</strong> menghimpunkan dokumen strategik, KPI, akreditasi dan takwim — gunakan kotak carian dokumen untuk mencari tajuk atau sumber dengan pantas.</p></div>
+        </div>
+
+        <h2 class="section-title">Soalan Lazim</h2>
+        <div class="faq-list" style="margin-top:1rem">
+          <details><summary>Apakah SUB-SKU PPD 2026?</summary><p>SUB-SKU ialah pecahan sasaran strategik mengikut Teras, tier jawatan, PIC serta jabatan atau unit bagi memudahkan pelaksanaan dan pemantauan di Politeknik Port Dickson.</p></details>
+          <details><summary>Di manakah saya perlu mengemaskini rekod?</summary><p>Gunakan borang Butiran dalam Workspace (untuk pentadbir yang tersenarai). Kemaskini dibuat terus pada rekod yang sama dalam MASTER SUB-SKU 2026 dan direkodkan dalam log audit portal.</p></details>
+          <details><summary>Siapakah yang boleh mengemaskini data?</summary><p>Hanya pengguna dengan e-mel rasmi @polipd.edu.my yang tersenarai dalam tab PENTADBIR 2026. Pengguna lain mendapat akses baca sahaja. Untuk didaftarkan sebagai pentadbir, hubungi Sekretariat Data &amp; Maklumat.</p></details>
+          <details><summary>Apakah maksud “Perlu Tindakan”?</summary><p>Nilai YA dijana secara automatik jika rekod belum lengkap, belum disahkan atau sumbernya belum disahkan/cadangan baharu.</p></details>
+          <details><summary>Mengapa sesetengah pautan rujukan tidak boleh dibuka?</summary><p>Pautan yang dikenal pasti tidak sepadan dinyahaktifkan bagi mengelakkan penggunaan dokumen yang salah. Pentadbir perlu menggantikannya dengan pautan rasmi yang betul dalam tab REFERENCES.</p></details>
+          <details><summary>Berapa kerap data dikemaskini?</summary><p>Setiap kali halaman dimuatkan, portal mengambil data terus daripada hamparan induk — tiada salinan berasingan. Tekan Ctrl+F5 untuk memuat semula sepenuhnya jika paparan kelihatan lama.</p></details>
+        </div>
+
+        <h2 class="section-title" style="margin-top:2.4rem">Masalah Teknikal</h2>
+        <div class="faq-list" style="margin-top:1rem">
+          <details><summary>“Sambungan ke backend gagal” — apa perlu dibuat?</summary><p>Portal ini memerlukan log masuk akaun Google organisasi. Sila pastikan: (1) anda telah log masuk dengan akaun <strong>@polipd.edu.my</strong> dalam pelayar yang sama; (2) log keluar daripada akaun Google peribadi, atau gunakan profil pelayar yang hanya mempunyai akaun polipd; (3) kuki pihak ketiga untuk <strong>script.google.com</strong> tidak disekat dalam tetapan privasi pelayar; kemudian (4) muat semula halaman dengan Ctrl+F5.</p></details>
+          <details><summary>Data tidak dipaparkan atau kelihatan lama</summary><p>Tekan <strong>Ctrl+F5</strong> untuk memuat semula tanpa cache. Jika masih gagal, cuba buka portal dalam tetingkap penyemak imbas baharu selepas log masuk akaun polipd.</p></details>
+          <details><summary>“Akses baca sahaja” walaupun saya pentadbir</summary><p>Semak bahawa e-mel yang anda gunakan untuk log masuk sama dengan e-mel dalam tab PENTADBIR 2026 (ejaan penuh, tanpa jarak). Jika baru didaftarkan, muat semula halaman selepas pendaftaran dibuat.</p></details>
+        </div>
+
+        <div class="support-panel">
+          <div><h2>Perlukan bantuan lanjut?</h2><p>Hubungi Sekretariat Data &amp; Maklumat, Jawatankuasa Pengurusan Strategik PPD untuk pendaftaran pentadbir, pembetulan data atau pautan dokumen.</p></div>
+          <a class="button button-lime" href="mailto:juliemarlina@polipd.edu.my?subject=Bantuan%20Portal%20SUB-SKU%20PPD%202026">Hubungi Sekretariat →</a>
+        </div>
       </div>
     </section>
   </main>
