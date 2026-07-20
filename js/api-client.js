@@ -3,7 +3,7 @@
   let sequence = 0;
 
   function assertConfigured() {
-    if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(config.apiUrl || '')) {
+    if (!/^https:\/\/script\.google\.com\/(a\/macros\/[^/]+\/)?(macros\/)?s\/.+\/exec$/.test(config.apiUrl || '')) {
       throw new Error('URL backend belum dikonfigurasi.');
     }
   }
