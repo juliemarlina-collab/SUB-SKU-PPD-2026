@@ -1,214 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="ms">
 <head>
+  <base target="_top">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SUB-SKU PPD 2026 - Utama</title>
-  <style>
-    :root {
-      --color-navy: #0A0E4A;
-      --color-blue-violet: #5457FF;
-      --color-lime: #CFFA66;
-      --color-coral: #FF6B6B;
-      --color-pink: #FF69A4;
-      --text-primary: #0A0E4A;
-      --text-muted: #666666;
-      --border-default: #E8E6F5;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f5f5f5; }
-    
-    /* HEADER */
-    .header {
-      background: #fff;
-      padding: 16px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    .logo-section { display: flex; gap: 12px; align-items: center; }
-    .logo { width: 36px; height: 36px; background: var(--color-lime); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--color-navy); font-size: 20px; }
-    .logo-text h2 { font-size: 14px; font-weight: 700; color: var(--color-navy); margin: 0; }
-    .logo-text p { font-size: 10px; color: var(--text-muted); margin: 0; }
-    .nav { display: flex; gap: 8px; flex-wrap: wrap; }
-    .nav a { padding: 10px 16px; background: none; color: var(--text-muted); border: none; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; }
-    .nav a.active { background: var(--color-blue-violet); color: #fff; border-radius: 24px; }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #5457FF 0%, #6B69FF 100%);
-      padding: 48px 32px;
-      color: #fff;
-    }
-    .hero-content { max-width: 1200px; margin: 0 auto; }
-    .badge { display: inline-block; background: rgba(207,250,102,.25); color: var(--color-lime); font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 6px 12px; border-radius: 20px; margin-bottom: 20px; }
-    .hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
-    .hero p { font-size: 16px; opacity: .95; max-width: 600px; line-height: 1.6; }
-
-    /* METRICS */
-    .metrics {
-      background: var(--color-navy);
-      border-radius: 12px;
-      padding: 32px;
-      margin: 48px auto;
-      max-width: 1200px;
-      color: #fff;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 24px;
-    }
-    .metric { border-top: 4px solid var(--color-lime); padding-top: 16px; }
-    .metric.blue { border-top-color: #8688FF; }
-    .metric.coral { border-top-color: var(--color-coral); }
-    .metric.pink { border-top-color: var(--color-pink); }
-    .metric-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 12px; }
-    .metric-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; opacity: .8; margin-bottom: 8px; }
-    .metric-value { font-size: 36px; font-weight: 800; }
-
-    /* TERAS CARDS */
-    .section { max-width: 1200px; margin: 48px auto; padding: 0 32px; }
-    .section-title { font-size: 14px; font-weight: 700; color: var(--color-navy); margin-bottom: 20px; }
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-    .card-badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; padding: 4px 8px; border-radius: 4px; margin-bottom: 12px; }
-    .card h3 { font-size: 14px; font-weight: 700; color: var(--color-navy); margin-bottom: 8px; }
-    .card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-
-    /* FOOTER */
-    .footer {
-      background: #fff;
-      border-top: 1px solid #e0e0e0;
-      padding: 28px 32px;
-      text-align: center;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 48px;
-    }
-  </style>
+  <meta name="description" content="Portal rujukan, pemantauan dan pengurusan SUB-SKU Politeknik Port Dickson 2026.">
+  <title>SUB-SKU PPD 2026</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Langkau ke kandungan utama</a>
+  <header class="site-header">
+    <a class="brand" href="?page=utama" data-view="utama" aria-label="SUB-SKU PPD 2026 — Utama">
+      <span class="brand-mark" aria-hidden="true">PP</span>
+      <span><strong>SUB-SKU PPD 2026</strong><small>Hub Pengurusan Strategik Digital</small></span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Navigasi utama">
+      <button type="button" data-view="utama">Utama</button>
+      <button type="button" data-view="rujukan">Rujukan</button>
+      <button type="button" data-view="workspace">Workspace</button>
+      <button type="button" data-view="dashboard">Dashboard</button>
+      <button type="button" data-view="pentadbir">Pentadbir</button>
+      <button type="button" data-view="bantuan">Bantuan</button>
+    </nav>
+  </header>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="logo-section">
-    <div class="logo">PP</div>
-    <div class="logo-text">
-      <h2>SUB-SKU PPD 2026</h2>
-      <p>Hub Pengurusan Strategik Digital</p>
-    </div>
-  </div>
-  <div class="nav">
-    <a href="index.html" class="active">Utama</a>
-    <a href="rujukan.html">Rujukan</a>
-    <a href="workspace.html">Workspace</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="pentadbir.html">Pentadbir</a>
-    <a href="lain-lain.html">Bantuan</a>
-  </div>
-</div>
+  <main id="main-content" tabindex="-1">
+    <section class="view" id="view-utama" data-page="utama">
+      <div class="hero">
+        <div class="hero-inner">
+          <span class="eyebrow">Portal Rasmi SUB-SKU PPD 2026</span>
+          <h1>Satu sumber data untuk rujukan, pengesahan dan pemantauan.</h1>
+          <p>Maklumat dipaparkan terus daripada hamparan induk yang telah distrukturkan dan disemak dalam Fasa 1.</p>
+          <div class="hero-actions">
+            <button class="button button-lime" type="button" data-view="workspace">Buka Workspace</button>
+            <button class="button button-outline" type="button" data-view="dashboard">Lihat Dashboard</button>
+          </div>
+        </div>
+      </div>
+      <div class="container section-overlap">
+        <div class="metric-grid" id="home-metrics" aria-live="polite"></div>
+      </div>
+      <section class="container section intro-section" aria-labelledby="intro-title">
+        <div class="intro-panel">
+          <span class="eyebrow dark">Pengenalan SUB-SKU PPD 2026</span>
+          <h2 id="intro-title">Kerangka kerja strategik PPD yang boleh dijejak dan disahkan.</h2>
+          <p>SUB-SKU menghimpunkan sasaran jabatan dan unit di bawah lapan Teras Politeknik Cemerlang. Portal ini membantu warga PPD mencari rekod, menyemak sumber, memantau status kelulusan dan mengenal pasti tindakan susulan menggunakan satu set data yang sama.</p>
+        </div>
+      </section>
+      <section class="container section" aria-labelledby="home-teras-title">
+        <div class="section-heading"><div><span class="eyebrow dark">Kemajuan Semasa</span><h2 id="home-teras-title">Kemajuan mengikut Teras</h2></div><button class="text-button" type="button" data-view="dashboard">Analisis penuh</button></div>
+        <div class="teras-grid" id="home-teras"></div>
+      </section>
+    </section>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-content">
-    <div class="badge">PORTAL RASMI SUB-SKU PPD 2026</div>
-    <h1>Satu sumber data untuk rujukan, pengesahan dan pemantauan.</h1>
-    <p>Maklumat dipaparkan terus daripada hamparan induk yang telah distrukturkan dan disemak dalam Fasa 1.</p>
-  </div>
-</div>
+    <section class="view" id="view-rujukan" data-page="rujukan" hidden>
+      <div class="page-hero"><div class="container"><span class="eyebrow">Sumber Disemak</span><h1>Dokumen Rujukan</h1><p>Pautan dipaparkan bersama status QA supaya pengguna tidak tersilap menggunakan sumber yang belum disahkan.</p></div></div>
+      <div class="container section">
+        <div class="notice warning"><strong>Perhatian:</strong> Pautan yang tidak sepadan dinyahaktifkan sehingga dokumen yang betul disahkan oleh pentadbir.</div>
+        <div class="filter-row"><label>Tapisan kategori<select id="reference-category"><option value="">Semua kategori</option></select></label></div>
+        <div class="reference-list" id="reference-list" aria-live="polite"></div>
+      </div>
+    </section>
 
-<!-- METRICS -->
-<div class="metrics" id="metricsContainer">
-  <div class="metric">
-    <div class="metric-icon" style="background: var(--color-lime);">📋</div>
-    <div class="metric-label">Bilangan Rekod</div>
-    <div class="metric-value" id="totalRecords">-</div>
-  </div>
-  <div class="metric blue">
-    <div class="metric-icon" style="background: #8688FF;">✓</div>
-    <div class="metric-label">Disahkan</div>
-    <div class="metric-value" id="assignedRecords">-</div>
-  </div>
-  <div class="metric coral">
-    <div class="metric-icon" style="background: var(--color-coral);">!</div>
-    <div class="metric-label">Perlu Tindakan</div>
-    <div class="metric-value" id="pendingRecords">-</div>
-  </div>
-  <div class="metric pink">
-    <div class="metric-icon" style="background: var(--color-pink);">%</div>
-    <div class="metric-label">Peratus Disahkan</div>
-    <div class="metric-value" id="percentageRecords">-</div>
-  </div>
-</div>
+    <section class="view" id="view-workspace" data-page="workspace" hidden>
+      <div class="page-hero"><div class="container"><span class="eyebrow">Data Langsung</span><h1>Workspace SUB-SKU</h1><p>Cari, tapis dan semak semua rekod tanpa menduplikasi data daripada hamparan induk.</p></div></div>
+      <div class="container section">
+        <form id="record-filters" class="filter-panel" role="search">
+          <label class="wide">Cari rekod<input id="filter-query" type="search" placeholder="ID, SUB-SKU, jabatan, PIC atau KPI"></label>
+          <label>Teras<select id="filter-teras"><option value="">Semua Teras</option></select></label>
+          <label>Tier jawatan<select id="filter-tier"><option value="">Semua tier</option></select></label>
+          <label>Status kelulusan<select id="filter-approval"><option value="">Semua status</option></select></label>
+          <label>Perlu tindakan<select id="filter-action"><option value="">Semua</option><option value="YA">YA</option><option value="TIDAK">TIDAK</option></select></label>
+          <button class="button button-navy" type="reset">Tetapkan semula</button>
+        </form>
+        <div class="result-toolbar"><p id="record-count" aria-live="polite">Memuatkan rekod…</p><button id="export-page" class="text-button" type="button">Eksport halaman (.csv)</button></div>
+        <div class="table-wrap"><table class="data-table"><thead><tr><th>ID Rekod</th><th>Teras</th><th>Jabatan / Unit</th><th>SUB-SKU 2026</th><th>Status kelulusan</th><th>Tindakan</th><th><span class="sr-only">Butiran</span></th></tr></thead><tbody id="record-rows"></tbody></table></div>
+        <div class="pagination"><button id="previous-page" class="button button-soft" type="button">Sebelumnya</button><span id="page-status">Halaman 1</span><button id="next-page" class="button button-navy" type="button">Seterusnya</button></div>
+      </div>
+    </section>
 
-<!-- TERAS SECTION -->
-<div class="section">
-  <h2 class="section-title">Kerangka Kerja Strategik</h2>
-  <div class="cards-grid">
-    <div class="card">
-      <div class="card-badge" style="background: #FFE5E5; color: var(--color-coral);">01</div>
-      <h3>Kecakapan Tadbir Urus</h3>
-      <p>Penambahbaikan tadbir urus dan pengurusan organisasi</p>
-    </div>
-    <div class="card">
-      <div class="card-badge" style="background: #E5F0FF; color: var(--color-blue-violet);">02</div>
-      <h3>Program TVET Bernilai Tinggi</h3>
-      <p>Pembangunan program TVET berkualiti tinggi</p>
-    </div>
-    <div class="card">
-      <div class="card-badge" style="background: #F0E5FF; color: var(--color-pink);">03</div>
-      <h3>Kolaborasi Pintar</h3>
-      <p>Kerjasama strategis dengan industri dan institusi</p>
-    </div>
-    <div class="card">
-      <div class="card-badge" style="background: #E5FFF0; color: var(--color-lime);">04</div>
-      <h3>Bakat Berprestasi Tinggi</h3>
-      <p>Pengembangan sumber manusia berkualiti</p>
-    </div>
-    <div class="card">
-      <div class="card-badge" style="background: #FFF5E5; color: #FF9F1C;">05</div>
-      <h3>Transformasi Digital</h3>
-      <p>Peningkatan infrastruktur dan kapabiliti digital</p>
-    </div>
-    <div class="card">
-      <div class="card-badge" style="background: #E5FFFF; color: #00BCD4;">06</div>
-      <h3>Penyeliaan Mutu</h3>
-      <p>Jaminan kualiti dalam semua operasi</p>
-    </div>
-    <div class="card">
-      <div class="card-badge" style="background: #FFE5F5; color: var(--color-pink);">07</div>
-      <h3>Keberlanjutan Organisasi</h3>
-      <p>Pembangunan berkelanjutan jangka panjang</p>
-    </div>
-    <div class="card">
-      <div class="card-badge" style="background: #F5E5FF; color: #8B5CF6;">08</div>
-      <h3>Penggalakan Inovasi</h3>
-      <p>Budaya pembelajaran dan inovasi berterusan</p>
-    </div>
-  </div>
-</div>
+    <section class="view" id="view-dashboard" data-page="dashboard" hidden>
+      <div class="page-hero"><div class="container"><span class="eyebrow">Pemantauan</span><h1>Dashboard Prestasi</h1><p>Semua indikator dikira secara langsung daripada status Fasa 1 dalam hamparan induk.</p></div></div>
+      <div class="container section">
+        <div class="metric-grid" id="dashboard-metrics"></div>
+        <div class="dashboard-grid">
+          <section class="panel" aria-labelledby="approval-title"><h2 id="approval-title">Status kelulusan</h2><div id="approval-bars"></div></section>
+          <section class="panel" aria-labelledby="source-title"><h2 id="source-title">Status sumber</h2><div id="source-bars"></div></section>
+        </div>
+        <section class="panel" aria-labelledby="dashboard-teras-title"><div class="section-heading"><h2 id="dashboard-teras-title">Prestasi mengikut Teras</h2></div><div class="teras-table" id="dashboard-teras"></div></section>
+      </div>
+    </section>
 
-<!-- FOOTER -->
-<div class="footer">
-  <p>© 2026 Politeknik Port Dickson</p>
-  <p>Sistem Pengurusan Sub-SKU PPD 2026</p>
-</div>
+    <section class="view" id="view-pentadbir" data-page="pentadbir" hidden>
+      <div class="page-hero admin"><div class="container"><span class="eyebrow">Akses Terkawal</span><h1>Panel Pentadbir</h1><p>Kemaskini hanya dibenarkan kepada e-mel rasmi yang tersenarai dalam tab PENTADBIR 2026.</p></div></div>
+      <div class="container section" id="admin-content"><div class="loading-card">Menyemak akses pentadbir…</div></div>
+    </section>
 
-<script>
-// Load dashboard data
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof google !== 'undefined' && google.script) {
-    google.script.run.withSuccessHandler(function(data) {
-      document.getElementById('totalRecords').textContent = data.total || 0;
-      document.getElementById('assignedRecords').textContent = data.assigned || 0;
-      document.getElementById('pendingRecords').textContent = data.pending || 0;
-      document.getElementById('percentageRecords').textContent = (data.percentage || 0) + '%';
-    }).getDashboardData();
-  }
-});
-</script>
+    <section class="view" id="view-bantuan" data-page="bantuan" hidden>
+      <div class="page-hero"><div class="container"><span class="eyebrow">Panduan Pengguna</span><h1>Bantuan & Soalan Lazim</h1><p>Panduan ringkas untuk menggunakan portal dengan betul dan selamat.</p></div></div>
+      <div class="container section faq-list">
+        <details><summary>Apakah SUB-SKU PPD 2026?</summary><p>SUB-SKU ialah pecahan sasaran strategik mengikut Teras, tier jawatan, PIC serta jabatan atau unit bagi memudahkan pelaksanaan dan pemantauan di Politeknik Port Dickson.</p></details>
+        <details><summary>Di manakah saya perlu mengemaskini rekod?</summary><p>Gunakan Panel Pentadbir dalam portal. Kemaskini dibuat terus pada rekod yang sama dalam MASTER SUB-SKU 2026 dan direkodkan dalam log audit.</p></details>
+        <details><summary>Mengapa sesetengah pautan rujukan tidak boleh dibuka?</summary><p>Pautan yang dikenal pasti tidak sepadan dinyahaktifkan bagi mengelakkan penggunaan dokumen yang salah. Pentadbir perlu menggantikannya dengan pautan rasmi yang betul.</p></details>
+        <details><summary>Siapakah yang boleh mengemaskini data?</summary><p>Hanya pengguna dengan e-mel rasmi @polipd.edu.my yang tersenarai dalam tab PENTADBIR 2026. Pengguna lain mendapat akses baca sahaja.</p></details>
+        <details><summary>Apakah maksud “Perlu Tindakan”?</summary><p>Nilai YA dijana secara automatik jika rekod belum lengkap, belum disahkan atau sumbernya belum disahkan/cadangan baharu.</p></details>
+      </div>
+    </section>
+  </main>
 
+  <footer><p>Sistem Pengurusan SUB-SKU PPD 2026 © 2026 Politeknik Port Dickson</p><p id="data-timestamp">Sumber: hamparan induk Fasa 1</p></footer>
+
+  <dialog id="record-dialog" aria-labelledby="dialog-title"><form method="dialog" class="dialog-shell"><div class="dialog-header"><div><span class="eyebrow dark">Butiran Rekod</span><h2 id="dialog-title">SUB-SKU</h2></div><button class="icon-button" value="cancel" aria-label="Tutup">×</button></div><div id="dialog-content"></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>window.INITIAL_VIEW = new URLSearchParams(location.search).get('page') || 'utama';</script>
+  <script src="config.js"></script>
+  <script src="api-client.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
