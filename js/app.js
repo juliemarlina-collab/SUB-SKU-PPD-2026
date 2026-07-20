@@ -8,7 +8,7 @@
   document.addEventListener('DOMContentLoaded', init);
 
   async function init() {
-    bindNavigation(); bindWorkspace(); bindReferenceFilter();
+    bindNavigation(); bindWorkspace();
     navigate(state.activeView);
     try {
       state.bootstrap = await gas('getPortalBootstrap');
@@ -44,7 +44,7 @@
     $('#home-teras').innerHTML = summary.teras.map(terasCard).join('');
     $('#dashboard-teras').innerHTML = summary.teras.map(t => `<div class="teras-line"><strong>${escapeHtml(t.name)}</strong><div class="progress" aria-label="${t.percentage}% disahkan"><span style="width:${t.percentage}%"></span></div><span>${t.approved}/${t.total} · ${t.percentage}%</span></div>`).join('');
     renderBars('#approval-bars', summary.approval, summary.total); renderBars('#source-bars', summary.source, summary.total);
-    renderReferences(references); populateSelect('#reference-category', [...new Set(references.map(r => r.category).filter(Boolean))]);
+    renderReferences(references);
     $('#data-timestamp').textContent = `Data dijana: ${generatedAt}`;
     if (!user.authorized) $('#admin-content').innerHTML = `<div class="error-box"><strong>Akses baca sahaja.</strong><br>${escapeHtml(user.reason || 'Akaun anda tidak mempunyai akses kemaskini.')}</div>`;
   }
@@ -60,14 +60,21 @@
     }).join('');
   }
 
-  function bindReferenceFilter() { $('#reference-category').addEventListener('change', event => renderReferences(state.bootstrap.references, event.target.value)); }
-  function renderReferences(references, category = '') {
-    const rows = references.filter(r => !category || r.category === category);
-    $('#reference-list').innerHTML = rows.map(r => {
-      const matched = r.qaStatus === 'PADANAN KANDUNGAN';
-      const link = matched && r.url ? `<a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer">Buka dokumen</a>` : `<span class="disabled-link">Perlu pengesahan</span>`;
-      return `<article class="reference-card"><div class="reference-code">${escapeHtml(r.id)}</div><div><h2>${escapeHtml(r.title)}</h2><p>${escapeHtml([r.category,r.source,r.year].filter(Boolean).join(' · '))}</p><span class="badge ${matched?'approved':'unreviewed'}">${escapeHtml(r.qaStatus || 'BELUM DISEMAK')}</span>${r.qaNote?`<p>${escapeHtml(r.qaNote)}</p>`:''}</div>${link}</article>`;
-    }).join('') || '<div class="empty-state">Tiada rujukan bagi kategori ini.</div>';
+  const REFERENCE_GROUPS = [['UTAMA', 'Dokumen Utama — Hala Tuju, KPI & Akreditasi'], ['SOKONGAN', 'Dokumen Sokongan'], ['DALAMAN', 'Dokumen Dalaman PPD']];
+  function renderReferences(references) {
+    if (!references.length) { $('#reference-list').innerHTML = '<div class="empty-state">Tiada rujukan buat masa ini.</div>'; return; }
+    const known = REFERENCE_GROUPS.map(([key]) => key);
+    const groups = REFERENCE_GROUPS.filter(([key]) => references.some(r => r.category === key))
+      .map(([key, label]) => [label, references.filter(r => r.category === key)]);
+    const others = references.filter(r => !known.includes(r.category));
+    if (others.length) groups.push(['Lain-lain', others]);
+    $('#reference-list').innerHTML = groups.map(([label, rows]) =>
+      `<section class="ref-group"><h3>${escapeHtml(label)}</h3>${rows.map(referenceCard).join('')}</section>`).join('');
+  }
+  function referenceCard(r) {
+    const flagged = r.qaStatus && r.qaStatus !== 'PADANAN KANDUNGAN';
+    const link = r.url && !flagged ? `<a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer">Buka dokumen</a>` : `<span class="disabled-link">Perlu pengesahan</span>`;
+    return `<article class="reference-card"><div class="reference-code">PDF</div><div><h4>${escapeHtml(r.title)}</h4><p>Sumber: ${escapeHtml([r.source, r.year].filter(Boolean).join(' · '))}</p>${flagged ? `<span class="badge unreviewed">${escapeHtml(r.qaStatus)}</span>${r.qaNote ? `<p>${escapeHtml(r.qaNote)}</p>` : ''}` : ''}</div>${link}</article>`;
   }
 
   function bindWorkspace() {
