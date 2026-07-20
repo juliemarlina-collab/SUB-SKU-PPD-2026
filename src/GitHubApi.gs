@@ -119,8 +119,8 @@ function getAdminPanelData() {
     user: user,
     overview: {
       registeredAdministrators: admins.length,
-      completeAdministratorRecords: admins.filter(function (a) { return a['STATUS QA DATA'] === 'LENGKAP'; }).length,
-      incompleteAdministratorRecords: admins.filter(function (a) { return a['STATUS QA DATA'] === 'PERLU LENGKAPKAN'; }).length,
+      completeAdministratorRecords: admins.filter(function (a) { return rowField_(a, /status qa/i) === 'LENGKAP'; }).length,
+      incompleteAdministratorRecords: admins.filter(function (a) { return rowField_(a, /status qa/i) === 'PERLU LENGKAPKAN'; }).length,
       recordsNeedingAction: records.filter(function (r) { return r.perluTindakan === 'YA'; }).length
     },
     activity: activity
@@ -269,15 +269,29 @@ function getUserContext_() {
   const ss = SpreadsheetApp.openById(CONFIG.spreadsheetId);
   const admins = getSheetObjects_(ss.getSheetByName(CONFIG.adminSheet), CONFIG.adminHeaderRow);
   const match = admins.filter(function (row) {
-    return clean_(row['eMEL rasmi @polipd.edu.my']).toLowerCase() === email;
+    return adminEmail_(row) === email;
   })[0];
   return {
     email: email,
-    name: match ? match.Nama : '',
-    department: match ? match.Jabatan : '',
+    name: match ? rowField_(match, /nama/i) : '',
+    department: match ? rowField_(match, /jabatan|unit/i) : '',
     authorized: Boolean(match && email.endsWith('@' + CONFIG.allowedDomain)),
     reason: match ? '' : 'E-mel tidak disenaraikan dalam PENTADBIR 2026.'
   };
+}
+
+// Header wording in PENTADBIR 2026 varies, so locate the e-mail column by
+// pattern first and fall back to any cell that contains "@".
+function adminEmail_(row) {
+  const keys = Object.keys(row);
+  let key = keys.filter(function (k) { return /mel|mail/i.test(k); })[0];
+  if (!key) key = keys.filter(function (k) { return String(row[k]).indexOf('@') !== -1; })[0];
+  return key ? clean_(row[key]).toLowerCase() : '';
+}
+
+function rowField_(row, pattern) {
+  const key = Object.keys(row).filter(function (k) { return pattern.test(k); })[0];
+  return key ? row[key] : '';
 }
 
 function requireAdministrator_() {
