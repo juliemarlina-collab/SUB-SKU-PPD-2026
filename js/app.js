@@ -39,18 +39,26 @@
     const metrics = [
       ['Bilangan rekod', summary.total], ['Disahkan', summary.approved], ['Perlu tindakan', summary.action], ['% disahkan', summary.approvedPercentage + '%']
     ];
-    const html = metrics.map(([label, value]) => `<article class="metric-card"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></article>`).join('');
-    $('#home-metrics').innerHTML = html; $('#dashboard-metrics').innerHTML = html;
-    $('#home-teras').innerHTML = summary.teras.map(terasCard).join('');
+    $('#dashboard-metrics').innerHTML = metrics.map(([label, value]) => `<article class="metric-card"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></article>`).join('');
+    const circles = [
+      [summary.total, 'circle-navy', 'Rekod SUB-SKU'],
+      [summary.teras.length, 'circle-lime', 'TERAS Strategik'],
+      [summary.action, 'circle-pink', 'Perlu Tindakan'],
+      [summary.approvedPercentage + '%', 'circle-coral', 'Disahkan Keseluruhan']
+    ];
+    $('#home-metrics').innerHTML = circles.map(([value, cls, label]) => `<div class="stat-circle"><div class="circle ${cls}">${escapeHtml(value)}</div><span>${escapeHtml(label)}</span></div>`).join('');
+    $$('[data-total]').forEach(el => { el.textContent = summary.total; });
+    const GAUGE_COLORS = ['var(--violet)', 'var(--lime)', 'var(--pink)', 'var(--coral)'];
+    $('#home-teras').innerHTML = summary.teras.map((t, i) => {
+      const color = GAUGE_COLORS[i % GAUGE_COLORS.length];
+      const notStarted = t.total > 0 && t.approved === 0;
+      return `<article class="gauge-card"><div class="gauge" style="background:conic-gradient(${color} 0% ${t.percentage}%, #EDEBFA ${t.percentage}% 100%)" role="img" aria-label="${t.percentage}% disahkan"><div class="gauge-core">${t.percentage}%</div></div><h3>${escapeHtml(t.name)}</h3>${notStarted ? '<span class="gauge-flag">Belum Bermula</span>' : ''}<span class="gauge-note">${t.approved} / ${t.total} disahkan</span></article>`;
+    }).join('');
     $('#dashboard-teras').innerHTML = summary.teras.map(t => `<div class="teras-line"><strong>${escapeHtml(t.name)}</strong><div class="progress" aria-label="${t.percentage}% disahkan"><span style="width:${t.percentage}%"></span></div><span>${t.approved}/${t.total} · ${t.percentage}%</span></div>`).join('');
     renderBars('#approval-bars', summary.approval, summary.total); renderBars('#source-bars', summary.source, summary.total);
     renderReferences(references);
     $('#data-timestamp').textContent = `Data dijana: ${generatedAt}`;
     if (!user.authorized) $('#admin-content').innerHTML = `<div class="error-box"><strong>Akses baca sahaja.</strong><br>${escapeHtml(user.reason || 'Akaun anda tidak mempunyai akses kemaskini.')}</div>`;
-  }
-
-  function terasCard(t) {
-    return `<article class="teras-card"><span class="badge info">${escapeHtml(t.name.split(' ')[0])}</span><h3>${escapeHtml(t.name.replace(/^T\d+\s*/, ''))}</h3><div class="split"><span>${t.approved} disahkan</span><strong>${t.total} rekod</strong></div><div class="progress"><span style="width:${t.percentage}%"></span></div><div class="split"><span>Kemajuan</span><strong>${t.percentage}%</strong></div></article>`;
   }
 
   function renderBars(selector, data, total) {

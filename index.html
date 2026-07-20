@@ -30,28 +30,54 @@
     <section class="view" id="view-utama" data-page="utama">
       <div class="hero">
         <div class="hero-inner">
-          <span class="eyebrow">Portal Rasmi SUB-SKU PPD 2026</span>
-          <h1>Satu sumber data untuk rujukan, pengesahan dan pemantauan.</h1>
-          <p>Maklumat dipaparkan terus daripada hamparan induk yang telah distrukturkan dan disemak dalam Fasa 1.</p>
-          <div class="hero-actions">
-            <button class="button button-lime" type="button" data-view="workspace">Buka Workspace</button>
-            <button class="button button-outline" type="button" data-view="dashboard">Lihat Dashboard</button>
+          <h1 class="hero-display">SUB-SKU PPD 2026<br><span>dalam Satu Pandangan</span></h1>
+          <p class="hero-sub">Status semasa <span data-total>terkini</span> rekod SUB-SKU PPD 2026, dikira secara langsung daripada data terkini.</p>
+          <div class="stat-circles" id="home-metrics" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <section class="container section" aria-labelledby="intro-title">
+        <h2 class="section-title" id="intro-title">Pengenalan SUB-SKU PPD 2026</h2>
+        <div class="intro-grid">
+          <div class="intro-navy">
+            <p>SUB-SKU PPD 2026 ialah hub pengurusan strategik digital Politeknik Port Dickson yang dibangunkan bagi memudahkan proses rujukan, penyelarasan, pengemaskinian dan pemantauan rekod SUB-SKU secara berpusat.</p>
+            <p class="dim">Portal ini membantu pihak pengurusan, Ketua Jabatan dan Unit, PIC serta Pentadbir SUB-SKU mendapatkan maklumat semasa, menyemak status pengesahan, mengenal pasti tindakan susulan dan mengakses dokumen strategik dengan lebih cepat, jelas dan tersusun.</p>
+          </div>
+          <div class="intro-features">
+            <div class="feature-card"><span class="feature-icon icon-violet">📚</span><div><h3>Rujukan Berpusat</h3><p>Menghimpunkan dokumen strategik, KPI, akreditasi, takwim dan sumber rasmi dalam satu portal.</p></div></div>
+            <div class="feature-card"><span class="feature-icon icon-coral">📈</span><div><h3>Pemantauan Masa Semasa</h3><p>Memaparkan kemajuan pengemaskinian, status pengesahan dan taburan rekod mengikut TERAS serta Jabatan/Unit.</p></div></div>
+            <div class="feature-card"><span class="feature-icon icon-pink">🧭</span><div><h3>Penyelarasan Lebih Sistematik</h3><p>Membantu PIC dan Pentadbir menyemak, menyelaras serta melengkapkan rekod berdasarkan tanggungjawab masing-masing.</p></div></div>
           </div>
         </div>
-      </div>
-      <div class="container section-overlap">
-        <div class="metric-grid" id="home-metrics" aria-live="polite"></div>
-      </div>
-      <section class="container section intro-section" aria-labelledby="intro-title">
-        <div class="intro-panel">
-          <span class="eyebrow dark">Pengenalan SUB-SKU PPD 2026</span>
-          <h2 id="intro-title">Kerangka kerja strategik PPD yang boleh dijejak dan disahkan.</h2>
-          <p>SUB-SKU menghimpunkan sasaran jabatan dan unit di bawah lapan Teras Politeknik Cemerlang. Portal ini membantu warga PPD mencari rekod, menyemak sumber, memantau status kelulusan dan mengenal pasti tindakan susulan menggunakan satu set data yang sama.</p>
+      </section>
+
+      <section class="container section" aria-labelledby="home-teras-title">
+        <h2 class="section-title" id="home-teras-title">Kemajuan Mengikut TERAS</h2>
+        <p class="section-note">Dikira secara langsung daripada <span data-total>rekod</span> rekod semasa — setiap gelung menunjukkan peratus rekod yang telah disahkan.</p>
+        <div class="gauge-grid" id="home-teras" aria-live="polite"></div>
+      </section>
+
+      <section class="container section">
+        <div class="cycle-panel">
+          <h2 class="section-title">Kitaran Pengemaskinian</h2>
+          <p class="section-note">Fasa semasa proses pengemaskinian dan pengesahan SUB-SKU 2026.</p>
+          <div class="phase-row">
+            <div class="phase"><span class="phase-dot active">1</span><h3>Pengemaskinian Dibuka</h3><p>Jabatan/Unit menyemak rekod</p></div>
+            <div class="phase"><span class="phase-line line-active"></span><span class="phase-dot">2</span><h3>Semakan PIC</h3><p>PIC mengesahkan data &amp; sasaran</p></div>
+            <div class="phase"><span class="phase-line"></span><span class="phase-dot">3</span><h3>Pengesahan</h3><p>Sekretariat mengesahkan rekod</p></div>
+            <div class="phase"><span class="phase-line"></span><span class="phase-dot">4</span><h3>Kunci Muktamad</h3><p>Data dikunci untuk laporan</p></div>
+          </div>
         </div>
       </section>
-      <section class="container section" aria-labelledby="home-teras-title">
-        <div class="section-heading"><div><span class="eyebrow dark">Kemajuan Semasa</span><h2 id="home-teras-title">Kemajuan mengikut Teras</h2></div><button class="text-button" type="button" data-view="dashboard">Analisis penuh</button></div>
-        <div class="teras-grid" id="home-teras"></div>
+
+      <section class="container section" aria-labelledby="quick-title">
+        <h2 class="section-title" id="quick-title">Akses Pantas</h2>
+        <div class="quick-grid">
+          <button type="button" class="quick-card" data-view="rujukan"><span class="feature-icon icon-violet">📋</span><h3>Rujukan SKU</h3><p>Dokumen strategik, KPI, akreditasi dan takwim rasmi.</p></button>
+          <button type="button" class="quick-card" data-view="workspace"><span class="feature-icon icon-coral">🗃️</span><h3>Workspace</h3><p>Cari dan semak rekod mengikut Jabatan/Unit.</p></button>
+          <button type="button" class="quick-card" data-view="dashboard"><span class="feature-icon icon-lime">📊</span><h3>Dashboard</h3><p>Analisis status pengesahan dan taburan rekod.</p></button>
+          <button type="button" class="quick-card" data-view="pentadbir"><span class="feature-icon icon-pink">🗂️</span><h3>Pentadbir</h3><p>Panel Pentadbir SUB-SKU untuk kemaskini rekod.</p></button>
+        </div>
       </section>
     </section>
 
