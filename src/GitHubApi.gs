@@ -71,7 +71,9 @@ function getRecords(params) {
   const teras = clean_(params.teras);
   const tier = clean_(params.tier);
   const approval = clean_(params.approval);
-  const action = clean_(params.action);
+  // The "action" URL parameter is reserved for the API operation name
+  // (always "records" here), so the Perlu Tindakan filter uses "tindakan".
+  const tindakan = clean_(params.tindakan);
   const filtered = records.filter(function (record) {
     const haystack = [record.recordId, record.teras, record.kluster, record.tier, record.pic,
       record.department, record.subSku, record.target, record.kpi].join(' ').toLowerCase();
@@ -79,7 +81,7 @@ function getRecords(params) {
       (!teras || record.teras === teras) &&
       (!tier || record.tier === tier) &&
       (!approval || record.statusKelulusan === approval) &&
-      (!action || record.perluTindakan === action);
+      (!tindakan || record.perluTindakan === tindakan);
   });
   const pageSize = Math.min(Math.max(Number(params.pageSize) || CONFIG.pageSize, 1), CONFIG.maxPageSize);
   const pageCount = Math.max(Math.ceil(filtered.length / pageSize), 1);

@@ -81,7 +81,7 @@
   }
 
   function readFilters() {
-    state.filters = { query: $('#filter-query').value, teras: $('#filter-teras').value, tier: $('#filter-tier').value, approval: $('#filter-approval').value, action: $('#filter-action').value };
+    state.filters = { query: $('#filter-query').value, teras: $('#filter-teras').value, tier: $('#filter-tier').value, approval: $('#filter-approval').value, tindakan: $('#filter-action').value };
   }
 
   async function loadRecords() {
