@@ -285,6 +285,12 @@ dialog::backdrop { background: rgba(10, 14, 74, .55); }
 a.button { text-decoration: none; display: inline-block; }
 .button-white { background: #fff; color: var(--navy); }
 .hero-note { font-size: .78rem; color: rgba(255,255,255,.85); margin-top: 12px; max-width: 680px; line-height: 1.6; }
+.info-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.4rem; }
+.info-card { border-radius: var(--radius-card); padding: 18px 22px; border: 1px solid var(--line); }
+.info-card h3 { font-size: .95rem; margin-bottom: 6px; }
+.info-card p { font-size: .82rem; line-height: 1.65; color: var(--navy); opacity: .85; }
+.info-lime { background: #F5FCDF; border-color: #DCF2A4; }
+.info-violet { background: #F1F0FC; border-color: #D9D6F4; }
 .donut-wrap { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 1rem; }
 .donut { width: 150px; height: 150px; border-radius: 50%; position: relative; flex-shrink: 0; background: var(--violet-soft); }
 .donut-core { position: absolute; inset: 16px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 700; color: var(--navy); text-align: center; }
@@ -349,6 +355,7 @@ a.button { text-decoration: none; display: inline-block; }
 @media (max-width: 640px) {
     .hero-inner { padding: 2rem 1.3rem; }
     .toc-grid { grid-template-columns: 1fr; }
+    .info-duo { grid-template-columns: 1fr; }
     .stat-circles { grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .stat-circle .circle { width: 88px; height: 88px; font-size: 1.3rem; }
     .intro-grid { grid-template-columns: 1fr; }
